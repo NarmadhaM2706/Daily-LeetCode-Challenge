@@ -2,18 +2,22 @@ class Solution {
     public int lowerbound(int[] nums,int target,int n){
         int low=0;
         int high=n-1;
-        int ans=n;
+        int ans=-1;
         while(low<=high)
         {
             int mid=low+(high-low)/2;
-            if(nums[mid] >=target)
+            if(nums[mid] ==target)
             {
                 ans=mid;
                 high=mid-1;
             }
-            else
+            else if(nums[mid]<target)
             {
                 low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
             }
         }
         return ans;
@@ -22,17 +26,21 @@ class Solution {
     {
         int low=0;
         int high=n-1;
-        int ans=n;
+        int ans=-1;
         while(low<=high){
             int mid=low+(high-low)/2;
-            if(nums[mid] > target)
+            if(nums[mid] == target)
             {
                 ans=mid;
-                high=mid-1;
+                low=mid+1;
+            }
+            else if(nums[mid] < target)
+            {
+                low=mid+1;
             }
             else
             {
-                low=mid+1;
+                high=mid-1;
             }
         }
         return ans;
@@ -40,7 +48,7 @@ class Solution {
     public int[] searchRange(int[] nums, int target) {
       int n=nums.length;
       int lb=lowerbound(nums,target,n);
-      if(lb == n || nums[lb] != target) return new int[]{-1,-1};
-      return new int[]{lb,upperbound(nums,target,n)-1};
+      if(lb == -1) return new int[]{-1,-1};
+      return new int[]{lb,upperbound(nums,target,n)};
     }
 }
