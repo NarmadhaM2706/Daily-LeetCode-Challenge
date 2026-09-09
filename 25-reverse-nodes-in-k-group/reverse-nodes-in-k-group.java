@@ -9,7 +9,7 @@
  * }
  */
 class Solution {
-    public ListNode fun(ListNode head, int k) {
+    public ListNode reverseKGroup(ListNode head, int k) {
         ListNode prev=null;
         ListNode curr=head;
         ListNode temp=head;
@@ -31,9 +31,5 @@ class Solution {
         head.next=reverseKGroup(curr,k);
         return prev;
     }
-    public ListNode reverseKGroup(ListNode head,int k)
-    {
-    head=fun(head,k);
-    return head;
-    }
+    
 }
