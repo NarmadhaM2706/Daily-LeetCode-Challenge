@@ -2,11 +2,10 @@ class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         Arrays.sort(nums1);
         Arrays.sort(nums2);
-        Set<Integer> set = new HashSet<>();
         int i=0;
         int j=0;
-        while(i<nums1.length && j< nums2.length)
-        {
+        Set<Integer> set= new HashSet<>();
+        while(i<nums1.length && j<nums2.length){
             if(nums1[i] < nums2[j])
             {
                 i++;
@@ -15,18 +14,19 @@ class Solution {
             {
                 j++;
             }
-            else 
+            else
             {
                 set.add(nums1[i]);
-                i++;j++;
+                i++;
+                j++;
             }
-            
         }
-        int[] res=new int[set.size()];
+        int[] res= new int[set.size()];
         int ind=0;
-        for(int k:set){
-            res[ind++]=k;
+        for(int num:set)
+        {
+            res[ind++]=num;
         }
-    return res;
+        return res;
     }
 }
