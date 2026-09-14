@@ -13,23 +13,23 @@ class Solution {
         ListNode prev=null;
         ListNode curr=head;
         ListNode temp=head;
-        int cnt=0;int c=0;
-        while(temp != null && cnt != k)
+        int cnt=0;
+        while(temp !=  null && cnt !=k)
         {
             cnt++;
             temp=temp.next;
         }
-        if(cnt<k) return curr;
-        while(curr != null && c != k)
-        {
-            ListNode safe=curr.next;
-            curr.next=prev;
-            prev=curr;
-            curr=safe;
-            c++;
-        }
-        head.next=reverseKGroup(curr,k);
-        return prev;
+    if(cnt<k) return curr;
+    cnt=0;
+    while(curr != null && cnt !=k)
+    {
+        ListNode safe=curr.next;
+        curr.next=prev;
+        prev=curr;
+        curr=safe;
+        cnt++;
     }
-    
+    head.next=reverseKGroup(curr,k);
+    return prev;
+    }
 }
