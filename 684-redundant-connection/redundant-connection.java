@@ -1,27 +1,23 @@
-class Redundant{
-    int[] set;
-	Redundant(int n){
-		set=new int[n+1];
-		for(int i=1;i<=n;i++) set[i]=i;
-	}
-    int find(int x) {
-		while(set[x]!=x) x=set[x];
-		return set[x];
-	}
-	boolean union(int a,int b) {
-		a=find(a);
-		b=find(b);
-		if(a==b) return false;
-        set[a]=b;
-        return true;
-	}
-}
 class Solution {
     public int[] findRedundantConnection(int[][] edges) {
-        Redundant r=new Redundant(edges.length);
-        for(int[] edge:edges){
-            if(!r.union(edge[0],edge[1])) return edge;
+        int n = edges.length;
+        int[] parent = new int[n+1];
+        for(int i = 1; i <= n; i++){
+            parent[i] = i;
         }
-        return new int[]{};
+        for(int[] edge: edges){
+            int u = edge[0], v = edge[1];
+            int rootU = find(parent, u);
+            int rootV = find(parent, v);
+            if(rootU == rootV) return edge;
+            parent[rootU] = rootV;
+        }
+        return new int[0];
+    }
+    private int find(int[] parent, int node){
+        if(parent[node] != node){
+            parent[node] = find(parent, parent[node]);
+        }
+        return parent[node];
     }
 }
